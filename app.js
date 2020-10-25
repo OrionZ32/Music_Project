@@ -12,6 +12,21 @@ mongoose.connect("mongodb://localhost:27017/musicAppDB", {
   useUnifiedTopology: true,
 });
 
+const discographySchema = new mongoose.Schema({
+  artistName: String,
+  collabArtistsName: String,
+  projectTitle: String,
+  projectType: String,
+  releaseDate: Date,
+  numberOfTracks: Number,
+  duration: Date,
+  rating: Number,
+  peakChartPosition: Number,
+  firstWeekSales: Number,
+  certificates: String,
+  label: String,
+  producers: String,
+});
 const artistSchema = new mongoose.Schema({
   artistName: String,
   firstName: String,
@@ -19,13 +34,14 @@ const artistSchema = new mongoose.Schema({
   birthDate: Date,
   dateSigned: Date,
   contract: String,
-  //   discography: discographySchema,
+  discography: discographySchema,
   netWorth: Number,
   monthlyListeners: Number,
   origin: String,
   occupations: String,
 });
 
+const Discography = mongoose.model("Discography", discographySchema);
 const Artist = mongoose.model("Artist", artistSchema);
 
 app.get("/", function (req, res) {
